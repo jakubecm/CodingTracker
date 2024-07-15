@@ -15,7 +15,7 @@ namespace CodingTracker
 
         public void InitializeDatabase()
         {
-            var createSql = @"CREATE TABLE IF NOT EXISTS SessionsTable ( Id INTEGER PRIMARY KEY, Start TEXT, End TEXT, Duration TEXT) ";
+            var createSql = @"CREATE TABLE IF NOT EXISTS SessionsTable ( Id INTEGER PRIMARY KEY AUTOINCREMENT, Start TEXT, End TEXT, Duration TEXT) ";
         }
 
         public void InsertSession()
