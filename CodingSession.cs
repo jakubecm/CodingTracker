@@ -3,15 +3,24 @@ namespace CodingTracker
 {
     public class CodingSession
     {
-        private DateTime StartTime { get; set; }
-        private DateTime EndTime { get; set; }
-        private TimeSpan Duration { get; set; }
+        public int Id { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public TimeSpan Duration { get; set; }
 
-        public CodingSession(DateTime startTime, DateTime endTime, TimeSpan duration)
+        public CodingSession(DateTime startTime, DateTime endTime, TimeSpan? duration = null)
         {
             StartTime = startTime;
             EndTime = endTime;
-            Duration = duration;
+
+            if (duration != null)
+            {
+                Duration = duration.Value;
+            }
+            else
+            {
+                Duration = this.CalculateDuration(StartTime, EndTime);
+            }
         }
 
         private TimeSpan CalculateDuration(DateTime start, DateTime end)
