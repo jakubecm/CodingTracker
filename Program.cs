@@ -23,6 +23,7 @@ namespace CodingTracker
                         tracker.StartLiveSession();
                         break;
                     case "Manual entry":
+                        tracker.ManualEntry();
                         break;
                     case "View records":
                         break;

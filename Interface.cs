@@ -1,4 +1,5 @@
 ﻿using Spectre.Console;
+using System.Globalization;
 
 namespace CodingTracker
 {
@@ -27,6 +28,24 @@ namespace CodingTracker
                 .PageSize(6)
                 .AddChoices(choices)
                 .HighlightStyle(new Style(Color.Green, decoration: Decoration.Bold)));
+        }
+
+        public static string GetDateTimeInput()
+        {
+            return AnsiConsole.Prompt(
+                new TextPrompt<string>("[bold white]Your answer:[/] ")
+                .PromptStyle("green")
+                .ValidationErrorMessage("[red]That is not a valid format[/]")
+                .Validate(date =>
+                {
+                    string format = "dd-MM-yyyy HH:mm:ss";
+                    DateTime temp;
+
+                    bool isValid = DateTime.TryParseExact(date, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out temp);
+
+                    return isValid ? ValidationResult.Success() : ValidationResult.Error("[bold red]Please enter the date in correct format[/]");
+                })
+            );
         }
     }
 }
